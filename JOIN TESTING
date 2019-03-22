@@ -1,0 +1,43 @@
+key_1<- c(1,2,3,4)
+names_1<-c("ahmed","mohamed","kada","david")
+df_1<- data.frame(cbind(key_1, names_1))
+View(df_1)
+
+key_2<- c(1,2,4,5)
+names_2<-c("ahmed","mohamed","david","sayf")
+df_2<- data.frame(cbind(key_2,names_2))
+View(df_2)
+
+#test join, left_join,right_join, full_join 
+
+inner_join( df_1, df_2, by = c("key_1" = "key_2"))
+
+test_join_df<- df_1 %>% inner_join(df_2, by = c("key_1" = "key_2"))
+
+View(test_join_df)
+semi_join ( df_1, df_2, by = c("key_1" = "key_2"))
+
+# test anti_join # equivalent setdiff ( comparaison with two df)
+key_3<- c(1,2,2,3,4)
+names_3<-c("ahmed","mohamed","mohamed", "kada","david")
+df_3<- data.frame(cbind(key_3,names_3))
+View(df_3)
+key_4<- c(1,2,4,5,5)
+names_4<-c("ahmed","mohamed","david","sayf","sayf")
+df_4<- data.frame(cbind(key_4,names_4))
+anti_join ( df_3, df_4, by = c("key_3" = "key_4"))
+
+distinct(df_3, key_3)
+distinct(df_4, key_4)
+
+duplicated_df_3<- df_3 %>% distinct(key_3, names_3, .keep_all = TRUE)
+View(duplicated_df_3)
+
+#identified duplicated rows
+duplicated(df_3)
+which(duplicated(df_3))
+
+semi_join( df_1, df_2, by = c("key_1" = "key_2"))
+anti_join( df_1, df_2, by = c("key_1" = "key_2"))
+
+inner_join( df_1, df_2, by = c("key_1" = "key_2"))
